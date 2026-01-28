@@ -1,0 +1,9 @@
+{
+	"name": "bittusinghdatafactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6c4f5dc6-be62-44ce-b0fc-68ccde2ddc93",
+		"tenantId": "12516cd1-b365-42e9-af9a-debe874b5fb3"
+	}
+}

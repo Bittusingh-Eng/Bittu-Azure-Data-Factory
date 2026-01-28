@@ -1,0 +1,45 @@
+{
+	"name": "DS_SQL_DATA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Ls_SQL_SERVER",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "EmpId",
+				"type": "varchar"
+			},
+			{
+				"name": "EmpName",
+				"type": "varchar"
+			},
+			{
+				"name": "Department",
+				"type": "varchar"
+			},
+			{
+				"name": "Salary",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "LoadDateTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "IsValid",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EmployeeFinalData"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

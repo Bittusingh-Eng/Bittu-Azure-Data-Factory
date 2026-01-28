@@ -1,0 +1,22 @@
+{
+	"name": "DS_SOURCE_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Ls_SQL_SERVER",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"table_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EmployeeFinalData"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
