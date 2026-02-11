@@ -1,0 +1,9 @@
+{
+	"name": "SH-integrationRuntime",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"selfContainedInteractiveAuthoringEnabled": true
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "DS_COPYDATA_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Ls_SQL_Srerver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "tblemp"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

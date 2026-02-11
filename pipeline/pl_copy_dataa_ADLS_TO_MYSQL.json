@@ -1,0 +1,68 @@
+{
+	"name": "pl_copy_dataa_ADLS_TO_MYSQL",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data ADLS TO MYQL",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_ADLS_SOURCE",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ADLS_TO_MYSQL",
+						"type": "DatasetReference",
+						"parameters": {
+							"Table_Name": {
+								"value": "table_name",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-02-11T07:37:23Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

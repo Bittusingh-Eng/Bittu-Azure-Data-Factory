@@ -1,0 +1,122 @@
+{
+	"name": "SqlServerTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ConfigID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SourceType",
+				"type": "varchar"
+			},
+			{
+				"name": "SrvCredential_Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SourceDatabase",
+				"type": "varchar"
+			},
+			{
+				"name": "SourceSchema",
+				"type": "varchar"
+			},
+			{
+				"name": "SourceObject",
+				"type": "varchar"
+			},
+			{
+				"name": "QueryText",
+				"type": "varchar"
+			},
+			{
+				"name": "IncrementalColumn",
+				"type": "varchar"
+			},
+			{
+				"name": "LoadType",
+				"type": "varchar"
+			},
+			{
+				"name": "WatermarkValue",
+				"type": "varchar"
+			},
+			{
+				"name": "SinkType",
+				"type": "varchar"
+			},
+			{
+				"name": "Target_SrvCredential_Id",
+				"type": "varchar"
+			},
+			{
+				"name": "ContainerName",
+				"type": "varchar"
+			},
+			{
+				"name": "FolderPath",
+				"type": "varchar"
+			},
+			{
+				"name": "FileNamePrefix",
+				"type": "varchar"
+			},
+			{
+				"name": "FileFormat",
+				"type": "varchar"
+			},
+			{
+				"name": "CompressionType",
+				"type": "varchar"
+			},
+			{
+				"name": "RunFrequency",
+				"type": "varchar"
+			},
+			{
+				"name": "RunTime",
+				"type": "time",
+				"scale": 7
+			},
+			{
+				"name": "AllowedDays",
+				"type": "varchar"
+			},
+			{
+				"name": "IsActive",
+				"type": "bit"
+			},
+			{
+				"name": "ExecutionOrder",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CreatedDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "tbl_Metadata_Config"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

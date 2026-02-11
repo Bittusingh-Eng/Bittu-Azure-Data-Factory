@@ -1,0 +1,35 @@
+{
+	"name": "SqlServer1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"Servername": {
+				"type": "string"
+			},
+			"Databasename": {
+				"type": "string"
+			},
+			"Username": {
+				"type": "string"
+			},
+			"Password": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "@{linkedService().Servername}",
+			"database": "@{linkedService().Databasename}",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "@{linkedService().Username}",
+			"password": "@{linkedService().Password}"
+		},
+		"connectVia": {
+			"referenceName": "SH-integrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

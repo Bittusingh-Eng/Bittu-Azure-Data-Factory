@@ -1,0 +1,21 @@
+{
+	"name": "Ls_SQL_Srerver",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "ASUS\\SQLEXPRESS",
+			"database": "PayrollDB",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "bittu",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2MGNiM2Q4NS0yZmNmLTRmOTItOTU3Zi1iMmNmNjY5ZjdkMzQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SH-integrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
