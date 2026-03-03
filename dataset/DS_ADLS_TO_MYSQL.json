@@ -1,0 +1,25 @@
+{
+	"name": "DS_ADLS_TO_MYSQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Ls_SQL_Srerver",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Table_Name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().Table_Name",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

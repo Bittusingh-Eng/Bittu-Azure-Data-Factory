@@ -1,0 +1,37 @@
+{
+	"name": "ds_ssms_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer2",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"ServerName": {
+				"type": "string"
+			},
+			"SourceDatabase": {
+				"type": "string"
+			},
+			"LoginName": {
+				"type": "string"
+			},
+			"Secret_LoginPwd": {
+				"type": "string"
+			},
+			"SourceSchema": {
+				"type": "string"
+			},
+			"SourceObject": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "tbl_Metadata_Config"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

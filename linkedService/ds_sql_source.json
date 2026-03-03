@@ -1,0 +1,35 @@
+{
+	"name": "ds_sql_source",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"Server_Name": {
+				"type": "String"
+			},
+			"Password": {
+				"type": "String"
+			},
+			"DB_Name": {
+				"type": "String"
+			},
+			"Login_Nmae": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "@{linkedService().Server_Name}",
+			"database": "@{linkedService().DB_Name}",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "@{linkedService().Login_Nmae}",
+			"password": "@{linkedService().Password}"
+		},
+		"connectVia": {
+			"referenceName": "SH-integrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
