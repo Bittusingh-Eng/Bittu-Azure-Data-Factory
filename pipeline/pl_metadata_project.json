@@ -1,0 +1,712 @@
+{
+	"name": "pl_metadata_project",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderStoredProcedureName": "[dbo].[usp_GetListTableForIngestion]",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "SqlServerTable1",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup1').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Set variable ServerName",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "ServerName",
+								"value": {
+									"value": "@item().ServerName",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable SourceDatabase",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "SourceDatabase",
+								"value": {
+									"value": "@item().SourceDatabase",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable LoginName",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "LoginName",
+								"value": {
+									"value": "@item().LoginName",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable LoginPwd",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "LoginPwd",
+								"value": {
+									"value": "@item().Secret_LoginPwd",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable SourceObject",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "SourceObject",
+								"value": {
+									"value": "@item().SourceObject",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable SourceSchema",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "SourceSchema",
+								"value": {
+									"value": "@item().SourceSchema",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable ContainerName",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "ContainerName",
+								"value": {
+									"value": "@item().ContainerName",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable FolderPath",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "FolderPath",
+								"value": {
+									"value": "@item().FolderPath",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable Configid",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Configid",
+								"value": {
+									"value": "@item().Configid",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variable Secret_LoginPwd",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Secret_LoginPwd",
+								"value": {
+									"value": "@item().Secret_LoginPwd",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set variableTarget_Secret_LoginPwd",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Target_Secret_LoginPwd",
+								"value": {
+									"value": "@item().Target_Secret_LoginPwd",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Set variable SourceSchema",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set variable SourceObject",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set variable FolderPath",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set variable ContainerName",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set variable Configid",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set variable Secret_LoginPwd",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set variableTarget_Secret_LoginPwd",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set variable LoginPwd",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set variable LoginName",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set variable SourceDatabase",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set variable ServerName",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set variable LoadType",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@equals(variables('LoadType'),'Full')",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Switch1",
+										"type": "Switch",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"on": {
+												"value": "@item().SourceType",
+												"type": "Expression"
+											},
+											"cases": [
+												{
+													"value": "SQLServer",
+													"activities": [
+														{
+															"name": "Stored procedure Process",
+															"type": "SqlServerStoredProcedure",
+															"dependsOn": [],
+															"policy": {
+																"timeout": "0.12:00:00",
+																"retry": 0,
+																"retryIntervalInSeconds": 30,
+																"secureOutput": false,
+																"secureInput": false
+															},
+															"userProperties": [],
+															"typeProperties": {
+																"storedProcedureName": "[dbo].[usp_Pipeline_Run_ControlLogging]",
+																"storedProcedureParameters": {
+																	"ActionEntry": {
+																		"value": "1",
+																		"type": "Byte"
+																	},
+																	"ConfigID": {
+																		"value": {
+																			"value": "@variables('Configid')",
+																			"type": "Expression"
+																		},
+																		"type": "Int32"
+																	},
+																	"ErrorMessage": {
+																		"value": null,
+																		"type": "String"
+																	},
+																	"PipelineName": {
+																		"value": {
+																			"value": "@pipeline().Pipeline",
+																			"type": "Expression"
+																		},
+																		"type": "String"
+																	},
+																	"TriggerType": {
+																		"value": {
+																			"value": "@pipeline().TriggerType",
+																			"type": "Expression"
+																		},
+																		"type": "String"
+																	},
+																	"LoadType": {
+																		"value": {
+																			"value": "@variables('LoadType')",
+																			"type": "Expression"
+																		},
+																		"type": "String"
+																	}
+																}
+															},
+															"linkedServiceName": {
+																"referenceName": "SqlServer2",
+																"type": "LinkedServiceReference"
+															}
+														},
+														{
+															"name": "Stored procedure Sucsses",
+															"type": "SqlServerStoredProcedure",
+															"dependsOn": [
+																{
+																	"activity": "Copy data1",
+																	"dependencyConditions": [
+																		"Succeeded"
+																	]
+																}
+															],
+															"policy": {
+																"timeout": "0.12:00:00",
+																"retry": 0,
+																"retryIntervalInSeconds": 30,
+																"secureOutput": false,
+																"secureInput": false
+															},
+															"userProperties": [],
+															"typeProperties": {
+																"storedProcedureName": "[dbo].[usp_Pipeline_Run_ControlLogging]",
+																"storedProcedureParameters": {
+																	"ActionEntry": {
+																		"value": "2",
+																		"type": "Byte"
+																	},
+																	"ConfigID": {
+																		"value": {
+																			"value": "@variables('Configid')",
+																			"type": "Expression"
+																		},
+																		"type": "Int32"
+																	},
+																	"ErrorMessage": {
+																		"value": null,
+																		"type": "String"
+																	},
+																	"PipelineName": {
+																		"value": {
+																			"value": "@pipeline().Pipeline",
+																			"type": "Expression"
+																		},
+																		"type": "String"
+																	},
+																	"TriggerType": {
+																		"value": {
+																			"value": "@pipeline().TriggerType",
+																			"type": "Expression"
+																		},
+																		"type": "String"
+																	},
+																	"LoadType": {
+																		"value": {
+																			"value": "@variables('LoadType')",
+																			"type": "Expression"
+																		},
+																		"type": "String"
+																	}
+																}
+															},
+															"linkedServiceName": {
+																"referenceName": "SqlServer2",
+																"type": "LinkedServiceReference"
+															}
+														},
+														{
+															"name": "Stored procedure Failure",
+															"type": "SqlServerStoredProcedure",
+															"dependsOn": [
+																{
+																	"activity": "Copy data1",
+																	"dependencyConditions": [
+																		"Failed"
+																	]
+																}
+															],
+															"policy": {
+																"timeout": "0.12:00:00",
+																"retry": 0,
+																"retryIntervalInSeconds": 30,
+																"secureOutput": false,
+																"secureInput": false
+															},
+															"userProperties": [],
+															"typeProperties": {
+																"storedProcedureName": "[dbo].[usp_Pipeline_Run_ControlLogging]",
+																"storedProcedureParameters": {
+																	"ActionEntry": {
+																		"value": "3",
+																		"type": "Byte"
+																	},
+																	"ConfigID": {
+																		"value": {
+																			"value": "@variables('Configid')",
+																			"type": "Expression"
+																		},
+																		"type": "Int32"
+																	},
+																	"ErrorMessage": {
+																		"value": {
+																			"value": "(activity('Stored procedure Process').error.message)\n",
+																			"type": "Expression"
+																		},
+																		"type": "String"
+																	},
+																	"PipelineName": {
+																		"value": {
+																			"value": "@pipeline().Pipeline",
+																			"type": "Expression"
+																		},
+																		"type": "String"
+																	},
+																	"TriggerType": {
+																		"value": {
+																			"value": "@pipeline().TriggerType",
+																			"type": "Expression"
+																		},
+																		"type": "String"
+																	},
+																	"LoadType": {
+																		"value": {
+																			"value": "@variables('LoadType')",
+																			"type": "Expression"
+																		},
+																		"type": "String"
+																	}
+																}
+															},
+															"linkedServiceName": {
+																"referenceName": "SqlServer2",
+																"type": "LinkedServiceReference"
+															}
+														},
+														{
+															"name": "Copy data1",
+															"type": "Copy",
+															"dependsOn": [
+																{
+																	"activity": "Stored procedure Process",
+																	"dependencyConditions": [
+																		"Succeeded"
+																	]
+																}
+															],
+															"policy": {
+																"timeout": "0.12:00:00",
+																"retry": 0,
+																"retryIntervalInSeconds": 30,
+																"secureOutput": false,
+																"secureInput": false
+															},
+															"userProperties": [],
+															"typeProperties": {
+																"source": {
+																	"type": "SqlServerSource",
+																	"queryTimeout": "02:00:00",
+																	"partitionOption": "None"
+																},
+																"sink": {
+																	"type": "ParquetSink",
+																	"storeSettings": {
+																		"type": "AzureBlobFSWriteSettings"
+																	},
+																	"formatSettings": {
+																		"type": "ParquetWriteSettings"
+																	}
+																},
+																"enableStaging": false,
+																"translator": {
+																	"type": "TabularTranslator",
+																	"typeConversion": true,
+																	"typeConversionSettings": {
+																		"allowDataTruncation": true,
+																		"treatBooleanAsNumber": false
+																	}
+																}
+															},
+															"inputs": [
+																{
+																	"referenceName": "ds_ssms_source",
+																	"type": "DatasetReference",
+																	"parameters": {
+																		"ServerName": "ASUS\\SQLEXPRESS",
+																		"SourceDatabase": "configfb",
+																		"LoginName": "bittu",
+																		"Secret_LoginPwd": "bittu123",
+																		"SourceSchema": "dbo",
+																		"SourceObject": "tbl_Metadata_Config"
+																	}
+																}
+															],
+															"outputs": [
+																{
+																	"referenceName": "ds_ADLS_Parquet",
+																	"type": "DatasetReference",
+																	"parameters": {
+																		"ADLS_Accesskey": {
+																			"value": "@variables('Secret_LoginPwd')",
+																			"type": "Expression"
+																		},
+																		"ADLS_Target": {
+																			"value": "@variables('ServerName')",
+																			"type": "Expression"
+																		},
+																		"containername": {
+																			"value": "@variables('ContainerName')",
+																			"type": "Expression"
+																		},
+																		"Path": {
+																			"value": "@variables('FolderPath')",
+																			"type": "Expression"
+																		},
+																		"TableName": {
+																			"value": "@variables('SourceObject')",
+																			"type": "Expression"
+																		}
+																	}
+																}
+															]
+														},
+														{
+															"name": "Send_Email_Support_Team",
+															"type": "WebActivity",
+															"dependsOn": [
+																{
+																	"activity": "Copy data1",
+																	"dependencyConditions": [
+																		"Failed"
+																	]
+																}
+															],
+															"policy": {
+																"timeout": "0.12:00:00",
+																"retry": 0,
+																"retryIntervalInSeconds": 30,
+																"secureOutput": false,
+																"secureInput": false
+															},
+															"userProperties": [],
+															"typeProperties": {
+																"method": "POST",
+																"url": "https://prod-09.centralindia.logic.azure.com:443/workflows/aedba8032eec4a74b4464cd9824900bc/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=NgLaOPKkUPcdbdX4c-IrxePB_IJc7bPK1XHgaxPGakU",
+																"body": {
+																	"value": "{\r\n  \"DataFactoryName\": \"datafactorybittu\",\r\n  \"PipelineName\": \"@{pipeline().Pipeline}\",\r\n  \"RunID\": \"@{pipeline().RunId}\",\r\n  \"ErrorMessage\": \"@{string(activity('Copy data1').error.message)}\"\r\n}\r\n",
+																	"type": "Expression"
+																}
+															}
+														}
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"name": "Set variable LoadType",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "LoadType",
+								"value": {
+									"value": "@item().LoadType",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"ServerName": {
+				"type": "String"
+			},
+			"SourceDatabase": {
+				"type": "String"
+			},
+			"LoginName": {
+				"type": "String"
+			},
+			"LoginPwd": {
+				"type": "String"
+			},
+			"SourceObject": {
+				"type": "String"
+			},
+			"SourceSchema": {
+				"type": "String"
+			},
+			"ContainerName": {
+				"type": "String"
+			},
+			"FolderPath": {
+				"type": "String"
+			},
+			"Configid": {
+				"type": "Integer"
+			},
+			"Secret_LoginPwd": {
+				"type": "String"
+			},
+			"Target_Secret_LoginPwd": {
+				"type": "String"
+			},
+			"LoadType": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-02-10T11:00:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

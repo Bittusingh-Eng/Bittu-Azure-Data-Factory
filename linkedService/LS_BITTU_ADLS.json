@@ -1,0 +1,15 @@
+{
+	"name": "LS_BITTU_ADLS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://storagebittu.dfs.core.windows.net/"
+		},
+		"connectVia": {
+			"referenceName": "SH-integrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

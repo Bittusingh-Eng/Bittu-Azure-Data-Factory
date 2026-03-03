@@ -1,0 +1,35 @@
+{
+	"name": "Ls_SQL_Srerver",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"Servername": {
+				"type": "string"
+			},
+			"SourceDatabase": {
+				"type": "string"
+			},
+			"LoginName": {
+				"type": "string"
+			},
+			"Secret_LoginPwd": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "@{linkedService().Servername}",
+			"database": "@{linkedService().SourceDatabase}",
+			"encrypt": "mandatory",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "@{linkedService().LoginName}",
+			"password": "@{linkedService().Secret_LoginPwd}"
+		},
+		"connectVia": {
+			"referenceName": "SH-integrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

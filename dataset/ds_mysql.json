@@ -1,0 +1,13 @@
+{
+	"name": "ds_mysql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_MYSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "MySqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

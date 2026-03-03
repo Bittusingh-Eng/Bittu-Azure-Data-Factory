@@ -1,0 +1,33 @@
+{
+	"name": "pl_pass_parameter_2adls",
+	"properties": {
+		"activities": [
+			{
+				"name": "Notebook pass_parameter_2adls",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/dataengineer138@gmail.com/nb_demo01",
+					"baseParameters": {
+						"input_path": "/Volumes/dbademo01_a/demoschema/myfile/Employee.csv"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks pass_parameter_2adls",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-02-17T15:42:10Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
